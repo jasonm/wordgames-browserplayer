@@ -89,12 +89,9 @@ const Game = React.createClass({
 
   render() {
     return (
-      <div className="nav">
-        <Board grid={ this.state.grid } players={ this.state.players } />
-      </div>
+      <Board grid={ this.state.grid } players={ this.state.players } />
     );
-  },
-
+  }
 });
 
 
@@ -132,25 +129,36 @@ function processEvent(event) {
       'right': [ 0,  1],
     }[event.direction];
 
-    const currentPosition = game.state.players[event.playerId].position;
+    const currentPosition = game.state.players[event.playerId].position,
+          newPosition = [
+            currentPosition[0] + rowOffset,
+            currentPosition[1] + colOffset
+          ],
+          newPositionOnGrid = (newPosition[0] >= 0) &&
+                              (newPosition[1] >= 0) &&
+                              (game.state.grid.length > newPosition[0]) &&
+                              (game.state.grid[0].length > newPosition[1]);
 
-    update({
-      players: {
-        [event.playerId]: {
-          position: {
-            $set: [
-              currentPosition[0] + rowOffset,
-              currentPosition[1] + colOffset
-            ]
+    if (newPositionOnGrid) {
+      update({
+        players: {
+          [event.playerId]: {
+            position: {
+              $set: newPosition
+            }
           }
         }
-      }
-    })
+      });
+    }
   }
 
   function isAdjacent(position1, position2) {
     return Math.abs(position1[0] - position2[0]) <= 1 &&
            Math.abs(position1[1] - position2[1]) <= 1;
+  }
+
+  function containsPosition(selection, position) {
+    return _.any(selection, _.partial(_.isEqual, position));
   }
 
   if (event.type === 'toggle') {
@@ -164,6 +172,9 @@ function processEvent(event) {
       newSelection = [currentPosition];
     } else if (_.isEqual(lastPosition, currentPosition)) {
       newSelection = currentSelection.slice(0, currentSelection.length - 1);
+    } else if (containsPosition(currentSelection, currentPosition)) {
+      console.log("intersect!");
+      return;
     } else if (isAdjacent(lastPosition, currentPosition)) {
       newSelection = currentSelection;
       newSelection.push(currentPosition);

@@ -1,6 +1,7 @@
-directly on game screen
-build a grid, that forms state
+Get started:
 
+```
+npm install && npm run start
 
-state = {
-}
+open http://localhost:8080/webpack-dev-server/
+```
