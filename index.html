@@ -1,12 +1,54 @@
-<!doctype html>  
-<html lang="en">  
-  <head>
-    <meta charset="utf-8">
-    <title>New React App</title>
-  </head>
-  <body>
-    <section id="react"></section>
-    <!-- <script src="build/bundle.js"></script> -->
-    <script src="bundle.js"></script>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New React App</title>
+</head>
+<body>
+
+<section id="root"></section>
+
+<script src="bundle.js"></script>
+
+<style type="text/css">
+
+.board {
+  position: relative;
+}
+
+.row {
+}
+
+.cell {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  outline: 1px solid #ccc;
+  text-align: center;
+  line-height: 40px;
+}
+
+.player {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  outline: 3px solid #111;
+
+  /* text-align: center; */
+  /* line-height: 40px; */
+}
+
+.playerSelectionMarker {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  outline: 2px dashed #ccc;
+  /* text-align: left; */
+  /* line-height: 40px; */
+}
+
+
+</style>
+
+</body>
 </html>
