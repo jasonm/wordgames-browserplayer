@@ -35,6 +35,7 @@ game.setState({
     }
   }
 });
+
 processEvent({ type: 'add-grid-row', row: ['c', 'a', 't', 'd', 'e', 'f', 'g'] });
 processEvent({ type: 'add-grid-row', row: ['a', 'b', 'c', 'd', 'o', 'g', 'g'] });
 processEvent({ type: 'add-grid-row', row: ['a', 'b', 'c', 'd', 'e', 'f', 'g'] });

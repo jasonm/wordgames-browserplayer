@@ -6,7 +6,8 @@ module.exports = {
     ],
     output: {
         path: __dirname + '/build',
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: "http://localhost:8080/assets/"
     },
     module: {
         loaders: [
@@ -18,6 +19,11 @@ module.exports = {
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
-    ]
-
+    ],
+    devServer: {
+        contentBase: "./build",
+        info: false, //  --no-info option
+        hot: true,
+        inline: true
+    }
 };
