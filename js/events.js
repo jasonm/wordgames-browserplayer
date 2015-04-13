@@ -7,6 +7,21 @@ export default function getUpdateForEvent(event, state) {
     return React.addons.update(state, patch);
   }
 
+  if (event.type === 'init') {
+    return {
+      grid: [],
+      players: {
+        'player1': {
+          name: "P1",
+          color: "#339933",
+          position: [0, 0],
+          selection: [],
+          words: []
+        }
+      }
+    }
+  }
+
   if (event.type === 'add-grid-row') {
     return update({
       grid: { $push: [event.row] }
@@ -40,6 +55,8 @@ export default function getUpdateForEvent(event, state) {
           }
         }
       });
+    } else {
+      return update({});
     }
   }
 

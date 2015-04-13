@@ -1,7 +1,7 @@
 class KeyboardController {
   constructor(options) {
     this.playerId = options.playerId;
-    this.processEvent = options.processEvent;
+    this.eventListener = options.eventListener;
     window.document.addEventListener("keydown", this.handleKeyDown.bind(this), false);
   }
 
@@ -20,7 +20,7 @@ class KeyboardController {
         playerId: this.playerId
       });
 
-      this.processEvent(event);
+      this.eventListener(event);
     }
   }
 }
